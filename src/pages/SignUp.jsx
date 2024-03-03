@@ -80,7 +80,7 @@ export default function SignUp() {
                 <Link to="/forgot-password"
                 className='text-red-600 hover:text-red-700 transition duration-200
                 ease-in-out'
-                >Register</Link>
+                >Forgot Password</Link>
               </div>
               <button className='w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium 
               uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out

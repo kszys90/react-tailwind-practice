@@ -70,12 +70,12 @@ export default function SignIn() {
                 <Link to="/forgot-password"
                 className='text-red-600 hover:text-red-700 transition duration-200
                 ease-in-out'
-                >Register</Link>
+                >Forgot Password</Link>
               </div>
               <button className='w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium 
               uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out
               hover:shadow-lg active:bg-blue-800'
-              >Sign in</button>
+              >Send reset password</button>
               <div className='flex my-4 items-center 
               before:border-t  before:flex-1 before:border-grey-300
               after:border-t  after:flex-1 after:border-grey-300'>
