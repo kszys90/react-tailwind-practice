@@ -27,7 +27,6 @@ export default function ForgotPassword() {
               onChange={handleChange}
               placeholder='Email addres'
               />
-            </form>
               <div className='flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6'>
                 <p>Don't have an account?
                 <Link to="/sign-up"
@@ -40,15 +39,16 @@ export default function ForgotPassword() {
                 ease-in-out'
                 >Sign in instead</Link>
               </div>
-              <button className='w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium 
+              <button type='submit' className='w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium 
               uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out
               hover:shadow-lg active:bg-blue-800'
-              >Sign in</button>
+              >Send reset password</button>
               <div className='flex my-4 items-center 
               before:border-t  before:flex-1 before:border-grey-300
               after:border-t  after:flex-1 after:border-grey-300'>
                 <p className='text-center font-semibold mx-4'>OR</p>
               </div>
+            </form>
               <Oauth />
           </div>
         </div>
