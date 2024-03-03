@@ -21,7 +21,7 @@ export default function SignIn() {
   }
   return (
     <section>
-        <h1 className='text-3xl text-center mt-6 font-bold'>Sign In</h1>
+        <h1 className='text-3xl text-center mt-6 mb-20 font-bold'>Sign In</h1>
         <div className='flex justify-center flex-wrap'>
           <div className='md:w-[67%] lg:w-[50%] mb-12 md:mb-6 items-center px-6 max-w-6xl'>
             <img className='w-full rounded-2xl'
@@ -59,7 +59,8 @@ export default function SignIn() {
                   />)
                 }
               </div>
-              <div className='flex justify-between whitespace-nowrap text-sm sm:text-lg'>
+            </form>
+              <div className='flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6'>
                 <p>Don't have an account?
                 <Link to="/sign-up"
                   className='text-red-600 hover:text-red-700 transition duration-200
@@ -81,7 +82,6 @@ export default function SignIn() {
                 <p className='text-center font-semibold mx-4'>OR</p>
               </div>
               <Oauth />
-            </form>
           </div>
         </div>
     </section>
