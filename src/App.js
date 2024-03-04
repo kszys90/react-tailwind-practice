@@ -34,7 +34,6 @@ function App() {
         draggable
         pauseOnHover
         theme="dark"
-        transition="Bounce"
       />
     </>
   );

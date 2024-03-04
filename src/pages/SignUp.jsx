@@ -110,13 +110,13 @@ export default function SignUp() {
               uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out
               hover:shadow-lg active:bg-blue-800'
               >Sign up</button>
-            </form>
               <div className='flex my-4 items-center 
               before:border-t  before:flex-1 before:border-grey-300
               after:border-t  after:flex-1 after:border-grey-300'>
                 <p className='text-center font-semibold mx-4'>OR</p>
               </div>
               <Oauth />
+            </form>
           </div>
         </div>
     </section>
