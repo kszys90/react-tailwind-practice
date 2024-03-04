@@ -41,7 +41,6 @@ export default function SignUp() {
       toast.success("Sign up was successful")
       navigate('/')
     } catch (error) {
-      // if u wanna same
       toast.error("Something went wrong with the registration")
     }
   }

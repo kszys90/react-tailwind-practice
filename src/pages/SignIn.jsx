@@ -1,10 +1,13 @@
 import React from 'react'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Oauth from '../components/Oauth';
+import { toast } from 'react-toastify';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function SignIn() {
+  const navigate = useNavigate()
   const [showPassowrd, setShowPassword] = React.useState(false)
   const [formData, setFormData] = React.useState({
     email: '',
@@ -19,6 +22,20 @@ export default function SignIn() {
     }
     })
   }
+  async function handleSubmit(e){
+    e.preventDefault()
+    try {
+      const auth = getAuth()
+      const userCredentials = await signInWithEmailAndPassword(auth, email, password)
+      if (userCredentials.user){
+        toast.success("Sign in successfully")
+        navigate("/")
+      }
+
+    } catch (error) {
+      toast.error("Bad user credentials")
+    }
+  }
   return (
     <section>
         <h1 className='text-3xl text-center mt-6 mb-20 font-bold'>Sign In</h1>
@@ -29,7 +46,7 @@ export default function SignIn() {
             alt="key" />
           </div>
           <div className='w-full px-6 md:w-[67%] lg:w-[40%] lg:ml-20'>
-            <form >
+            <form onSubmit={handleSubmit}>
               <input 
               className='w-full px-4 py-2 text-xl text-grey-700 bg-white border-grey-300
               rounded transition ease-in-out mb-6' 
@@ -80,8 +97,8 @@ export default function SignIn() {
               after:border-t  after:flex-1 after:border-grey-300'>
                 <p className='text-center font-semibold mx-4'>OR</p>
               </div>
-            </form>
               <Oauth />
+            </form>
           </div>
         </div>
     </section>
