@@ -3,7 +3,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import {db} from '../firebase'
-import { collection, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { FcHome } from "react-icons/fc";
 import ListingItem from '../components/ListingItem'
 
@@ -36,20 +36,36 @@ export default function Profile() {
   }
 
   async function onSubmit(){
-  try {
-    if (auth.currentUser.displayName!==name){
-      await updateProfile(auth.currentUser, {displayName: name})
+    try {
+      if (auth.currentUser.displayName!==name){
+        await updateProfile(auth.currentUser, {displayName: name})
+      }
+      const docRef=doc(db,"users", auth.currentUser.uid)
+      await updateDoc(docRef,{
+        name,
+      })
+      toast.success("Profile successfully updated")
+      
+    } catch (error) {
+      toast.error("Could not update the profile details")
     }
-    const docRef=doc(db,"users", auth.currentUser.uid)
-    await updateDoc(docRef,{
-      name,
-    })
-    toast.success("Profile successfully updated")
-    
-  } catch (error) {
-    toast.error("Could not update the profile details")
-}
   }
+
+  async function onDelete(id){
+    if(window.confirm("Are You sure you want to delete?")){
+      await deleteDoc(doc(db, "listings", id))
+      const updatedListings = listings.filter(
+        listing=>listing.id!==id
+      )
+      setListings(updatedListings)
+      toast.success("Successfully deleted the listing")
+    }
+  }
+
+  function onEdit(id){
+    navigate(`/edit-listing/${id}`)
+  }
+
   React.useEffect((()=>{
     async function fetchUserListings(){
       setLoading(true)
@@ -124,7 +140,9 @@ export default function Profile() {
             <h2 className='text-2xl text-center font-semibold my-6'>My Listings</h2>
             <ul className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl-grid-cols-5 mt-6 mb-6'>
               {listings.map((listing)=>(
-                  <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
+                  <ListingItem key={listing.id} id={listing.id} listing={listing.data} 
+                  onDelete={()=>onDelete(listing.id)} onEdit={()=>onEdit(listing.id)}
+                  />
               ))}
 
             </ul>
