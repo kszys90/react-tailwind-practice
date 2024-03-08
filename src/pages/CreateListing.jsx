@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 export default function CreateListing() {
   const navigate = useNavigate()
   const auth = getAuth()
+  // eslint-disable-next-line no-unused-vars
   const [geoLocationEnabled, setGeolocationEnabled] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [formData,setFormData]=React.useState({
@@ -21,7 +22,7 @@ export default function CreateListing() {
     bathrooms: 1,
     parking: false,
     furnished: false,
-    adress: '',
+    address: '',
     description: '',
     offer: false,
     regularPrice: 0,
@@ -30,7 +31,7 @@ export default function CreateListing() {
     longitude: 0,
     images: null
   })
-  const {type, name, bedrooms, bathrooms,parking, furnished, adress, description, offer
+  const {type, name, bedrooms, bathrooms,parking, furnished, address: adress, description, offer
   ,regularPrice, discountedPrice, latitude, longitude, images} = formData
 
   function handleChange(e){
@@ -127,7 +128,8 @@ export default function CreateListing() {
       ...formData,
       imgUrls,
       geolocation,
-      timestamp: serverTimestamp()
+      timestamp: serverTimestamp(),
+      userRef: auth.currentUser.uid
     }
     delete formDataCopy.images
     !formDataCopy.offer && delete formDataCopy.discountedPrice
@@ -223,7 +225,7 @@ export default function CreateListing() {
           </button>
         </div>
         <p className='text-lg mt-6 font-semibold'>Adress</p>
-        <textarea type="text" id="adress" value={adress} onChange={handleChange} placeholder="Adress"
+        <textarea type="text" id="address" value={adress} onChange={handleChange} placeholder="Adress"
           required className='w-full px-4 py-2 text-xl text-grey-700
           bg-white border border-grey-300 rounded transition duration-150 ease-in-out
           focus:text-grey-700 focus:bg-white focus:border-grey-700'
